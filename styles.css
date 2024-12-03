@@ -49,7 +49,7 @@ html, body {
 .button, #display {
     font-family: "Impact";
     font-size: 2rem;
-
+    min-height: 2.5rem;
     border: .15rem solid black;
     border-radius: 12px;
 }
@@ -152,8 +152,15 @@ html, body {
     grid-row-end: 6;
   }
 #equals-btn {
-    grid-column-start: 1;
+    grid-column-start: 4;
     grid-column-end: 6;
+    grid-row-start: 6;
+    grid-row-end: 7;
+  }
+
+#clear-btn {
+    grid-column-start: 1;
+    grid-column-end: 4;
     grid-row-start: 6;
     grid-row-end: 7;
   }
