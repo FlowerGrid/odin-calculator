@@ -22,10 +22,19 @@ function divide(n1, n2) {
 }
 
 function operate(operator, n1, n2) {
+    console.log(typeof(operator))
+    console.log(typeof(n1))
+    console.log(typeof(n2))
     if (operator) {
         switch(operator) {
             case '+':
                 return add(n1, n2);
+            case '-':
+                return subtract(n1, n2);
+            case 'x':
+                return multiply(n1, n2);
+            case 'divide':
+                return divide(n1, n2);
         }
     } else {
         alert('Must choose a number, and operator, and another number to calculate');
@@ -52,12 +61,16 @@ calculator.addEventListener('click', (event) => {
             display.textContent += target.getAttribute('data-digit');
         }
     } else if (target.classList.contains('operator')) {
-        let operator = target.getAttribute("data-oper");
-        num2 = +display.textContent;
-        num1 = operate(operator, num1, num2);
+        operator = target.getAttribute('data-oper');
+        num1 = +display.textContent;
+        display.textContent = '0';
 
     } else if (target.classList.contains('equals')) {
-        alert('equals');
+        num2 = +display.textContent;
+        num1 = operate(operator, num1, num2);
+        console.log(typeof(num1));
+        display.textContent = num1.toString();
+        operator = null;
     } else if (target.classList.contains('clear')) {
         clear()
     }
