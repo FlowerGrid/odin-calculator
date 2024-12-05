@@ -63,8 +63,13 @@ calculator.addEventListener('click', (event) => {
         }
     } else if (target.classList.contains('operator')) {
         operator = target.getAttribute('data-btnVal');
-        
-        if (num1) {
+        // I'm on to something. Last button press is gonna be the way to go
+        // It cleared the display value to 0. I want it to do nothing
+        // so maybe it'll just be it's own if block. need to see if javascript has pass
+
+        if (operators.includes(lastButtonPress)) {
+            ; // Haha, the solution was a semicolon by itself. Basically a pass statement
+        } else if (num1) {
             num2 = +display.textContent;
             num1 = operate(operator, num1, num2);
             display.textContent = num1.toString();
@@ -81,4 +86,6 @@ calculator.addEventListener('click', (event) => {
     } else if (target.classList.contains('clear')) {
         clear()
     }
+
+    lastButtonPress = target.getAttribute('data-btnVal');
 })
