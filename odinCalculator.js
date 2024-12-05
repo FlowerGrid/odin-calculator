@@ -1,7 +1,10 @@
 const display = document.querySelector("#display");
+const operators = ['+', '-', 'x', 'divide', 'equals']
 
+let lastButtonPress = null;
 let num1 = 0;
 let num2 = 0;
+let result = 0;
 let operator = null;
 
 
@@ -22,9 +25,6 @@ function divide(n1, n2) {
 }
 
 function operate(operator, n1, n2) {
-    console.log(typeof(operator))
-    console.log(typeof(n1))
-    console.log(typeof(n2))
     if (operator) {
         switch(operator) {
             case '+':
@@ -38,13 +38,14 @@ function operate(operator, n1, n2) {
         }
     } else {
         alert('Must choose a number, and operator, and another number to calculate');
-        clear();
     }
 
 }
 
 function clear() {
     num1 = 0;
+    num2 = 0;
+    result = 0;
     display.textContent = '0';
     operator = null;
 }
@@ -55,21 +56,27 @@ calculator.addEventListener('click', (event) => {
     let target = event.target;
 
     if (target.classList.contains('digit')) {
-        if (display.textContent === '0') {
-            display.textContent = target.getAttribute('data-digit');
+        if (num1 || display.textContent === '0') {
+            display.textContent = target.getAttribute('data-btnVal');
         } else {
-            display.textContent += target.getAttribute('data-digit');
+            display.textContent += target.getAttribute('data-btnVal');
         }
     } else if (target.classList.contains('operator')) {
-        operator = target.getAttribute('data-oper');
+        operator = target.getAttribute('data-btnVal');
+        
+        if (num1) {
+            num2 = +display.textContent;
+            num1 = operate(operator, num1, num2);
+            display.textContent = num1.toString();
+
+        } else {
         num1 = +display.textContent;
         display.textContent = '0';
-
+        }
     } else if (target.classList.contains('equals')) {
         num2 = +display.textContent;
         num1 = operate(operator, num1, num2);
-        console.log(typeof(num1));
-        display.textContent = num1.toString();
+        display.textContent = result.toString();
         operator = null;
     } else if (target.classList.contains('clear')) {
         clear()
