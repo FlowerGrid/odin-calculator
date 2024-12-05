@@ -76,7 +76,7 @@ calculator.addEventListener('click', (event) => {
     } else if (target.classList.contains('equals')) {
         num2 = +display.textContent;
         num1 = operate(operator, num1, num2);
-        display.textContent = result.toString();
+        display.textContent = num1.toString();
         operator = null;
     } else if (target.classList.contains('clear')) {
         clear()
