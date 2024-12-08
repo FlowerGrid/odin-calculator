@@ -54,15 +54,27 @@ function clear() {
 const calculator = document.querySelector(".calculator");
 calculator.addEventListener('click', (event) => {
     let target = event.target;
+    let btnVal = target.getAttribute('data-btnVal');
 
     if (target.classList.contains('digit')) {
-        if (num1 || display.textContent === '0') {
-            display.textContent = target.getAttribute('data-btnVal');
-        } else {
-            display.textContent += target.getAttribute('data-btnVal');
+        if (display.textContent === '0') {
+            if (btnVal === '.') {
+                display.textContent += btnVal;
+            } else {
+                display.textContent = btnVal;
+            }
+        } else if (num1 && operators.includes(lastButtonPress)) {
+            if (btnVal === '.') {
+                display.textContent = `0${btnVal}`;
+            } else {
+                display.textContent = btnVal;
+                console.log('num1 found');
+            }
+        }else {
+            display.textContent += btnVal;
         }
     } else if (target.classList.contains('operator')) {
-        operator = target.getAttribute('data-btnVal');
+        operator = btnVal;
         // I'm on to something. Last button press is gonna be the way to go
         // It cleared the display value to 0. I want it to do nothing
         // so maybe it'll just be it's own if block. need to see if javascript has pass
