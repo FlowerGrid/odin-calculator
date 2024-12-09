@@ -21,7 +21,12 @@ function multiply(n1, n2) {
 }
 
 function divide(n1, n2) {
-    return n1 / n2;
+    if (n2 === 0) {
+        clear()
+        alert('Cannot divide by zero. Calculator cleared.')
+    } else {
+        return n1 / n2;
+    }
 }
 
 function operate(operator, n1, n2) {
