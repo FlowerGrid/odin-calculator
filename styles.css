@@ -15,8 +15,9 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: lightseagreen;
+    background-color: #4d6e74;
     min-height: 3rem;
+    color: #fdfdfb;
 }
 
 .content {
@@ -24,7 +25,7 @@ html, body {
     justify-content: center;
     align-items: stretch;
     flex: 1;
-    background-color: lightslategray;
+    background-color: #e6e6e4;
 }
 
 .mainframe {
@@ -32,24 +33,25 @@ html, body {
     width: 60%;
     justify-content: center;
     align-items: center;
-    background-color: whitesmoke;
+    background-color: #fdfdfb;
 }
 
 .calculator {
     display: grid;
     padding: 2rem;
     gap: .4rem;
-    width: 80%;
-    height: 80%;
-    background-color: lightpink;
+    width: 28rem;
+    height: 32rem;
+    background-color: #8b9694;
     box-sizing: border-box;
+    border: black .15rem solid;
     border-radius: 12px;
 }
 
 .button, #display {
     font-family: "Impact";
     font-size: 2rem;
-    min-height: 2.5rem;
+    min-height: 15%;
     border: .15rem solid black;
     border-radius: 12px;
 }
@@ -60,13 +62,17 @@ html, body {
     justify-content: end;
     align-items: center;
     padding: .15rem .5rem;
-    
-
+    background-color: #d8d3c3;
     grid-column-start: 1;
     grid-column-end: 6;
     grid-row-start: 1;
     grid-row-end: 2;
   }
+
+.button {
+  background-color: #c8c8c8;
+}
+
 #no1 {
     grid-column-start: 1;
     grid-column-end: 2;

@@ -25,21 +25,46 @@ function divide(n1, n2) {
 }
 
 function operate(operator, n1, n2) {
+    let solution = 0;
     if (operator) {
         switch(operator) {
             case '+':
-                return add(n1, n2);
+                solution = add(n1, n2);
+                break;
             case '-':
-                return subtract(n1, n2);
+                solution = subtract(n1, n2);
+                break;
             case 'x':
-                return multiply(n1, n2);
+                solution = multiply(n1, n2);
+                break;
             case 'divide':
-                return divide(n1, n2);
+                solution = divide(n1, n2);
+                break;
         }
+        return roundSolution(solution)
     } else {
         alert('Must choose a number, and operator, and another number to calculate');
     }
 
+}
+
+function roundSolution(solution) {
+    console.log('in rounding function');
+    let strSolution = solution.toString();
+    if (strSolution.length > 14) {
+        // round decimals
+        if (strSolution.includes('.')) {
+            console.log('decimal detected')
+            return Number.parseFloat(solution).toExponential(2);
+        } else {
+            console.log('attempting to round');
+            alert('Character limit reached. Rounded to nearest integer');
+            return Number.parseFloat(solution).toExponential(2);
+        }
+    } else {
+        console.log('not rounded')
+        return solution;
+    }
 }
 
 function clear() {
@@ -50,14 +75,39 @@ function clear() {
     operator = null;
 }
 
+function limitDigits(num) {
+    if (num.length > 14) {
+        alert('Character limit reached. Maximum is 14')
+    } else {
+        display.textContent = num;
+    }
+}
+
 // Button click event handler
 const calculator = document.querySelector(".calculator");
-calculator.addEventListener('click', (event) => {
+
+// Change button color to indicate a click
+calculator.addEventListener('mousedown', (event) => {
+    let target = event.target;
+    if (target.classList.contains('button')) {
+        target.style.backgroundColor = '#ababa9';
+    }
+})
+
+calculator.addEventListener('mouseup', (event) => {
     let target = event.target;
     let btnVal = target.getAttribute('data-btnVal');
 
+    // Change button color back to original
+    if (target.classList.contains('button')) {
+        target.style.backgroundColor = '#c9c9c6';
+    }
+    
+
     if (target.classList.contains('digit')) {
-        if (display.textContent === '0') {
+        if (btnVal === '.' && display.textContent.includes('.')) {
+            ;
+        } else if (display.textContent === '0') {
             if (btnVal === '.') {
                 display.textContent += btnVal;
             } else {
@@ -68,10 +118,10 @@ calculator.addEventListener('click', (event) => {
                 display.textContent = `0${btnVal}`;
             } else {
                 display.textContent = btnVal;
-                console.log('num1 found');
             }
-        }else {
-            display.textContent += btnVal;
+        } else {
+            limitDigits(display.textContent + btnVal)
+            // display.textContent += btnVal;
         }
     } else if (target.classList.contains('operator')) {
         operator = btnVal;
@@ -100,4 +150,10 @@ calculator.addEventListener('click', (event) => {
     }
 
     lastButtonPress = target.getAttribute('data-btnVal');
+
+    // Limit the number of digits that can be displayed
+    // if (display.textContent.length < 14) {
+    //     let displayedNum = +display.textContent;
+
+    // }
 })
