@@ -26,6 +26,8 @@ function divide(n1, n2) {
 
 function operate(operator, n1, n2) {
     let solution = 0;
+    n1 = +n1;
+    console.log(typeof(n1))
     if (operator) {
         switch(operator) {
             case '+':
@@ -53,14 +55,7 @@ function roundSolution(solution) {
     let strSolution = solution.toString();
     if (strSolution.length > 14) {
         // round decimals
-        if (strSolution.includes('.')) {
-            console.log('decimal detected')
-            return Number.parseFloat(solution).toExponential(2);
-        } else {
-            console.log('attempting to round');
-            alert('Character limit reached. Rounded to nearest integer');
-            return Number.parseFloat(solution).toExponential(2);
-        }
+        return Number.parseFloat(solution).toExponential(4);
     } else {
         console.log('not rounded')
         return solution;
