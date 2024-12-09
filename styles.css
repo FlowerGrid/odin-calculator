@@ -34,6 +34,9 @@ html, body {
     justify-content: center;
     align-items: center;
     background-color: #fdfdfb;
+    box-sizing: border;
+    padding: .5rem;
+    min-width: calc(28rem + 1rem)
 }
 
 .calculator {
@@ -41,7 +44,9 @@ html, body {
     padding: 2rem;
     gap: .4rem;
     width: 28rem;
+    min-width: 28rem;
     height: 32rem;
+    min-height: 32rem;
     background-color: #8b9694;
     box-sizing: border-box;
     border: black .15rem solid;
